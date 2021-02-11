@@ -9,6 +9,8 @@ namespace GBCSporting2021_PepperoniPizza420.Models
 {
     public class Registration
     {
+        public int RegistrationId { get; set; }
+
         private Customer Customer { get; set; }
 
         [Key, Column(Order = 1)]
