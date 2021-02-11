@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Simon Bermudez\\.nuget\\packages\\": {}
+    "C:\\Users\\simon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Simon Bermudez\\Desktop\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
       "projectName": "GBCSporting2021_PepperoniPizza420",
-      "projectPath": "C:\\Users\\Simon Bermudez\\Desktop\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
-      "packagesPath": "C:\\Users\\Simon Bermudez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Simon Bermudez\\Desktop\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\obj\\",
+      "projectPath": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
+      "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Simon Bermudez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
