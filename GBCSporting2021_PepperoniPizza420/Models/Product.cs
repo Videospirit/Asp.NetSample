@@ -17,7 +17,7 @@ namespace GBCSporting2021_PepperoniPizza420.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter a Product Price."), Range(0.0, 1000000.0)]
-        public float Price { get; set; }
+        public double Price { get; set; }
 
         [Required(ErrorMessage = "Please enter a Product ReleaseDate."), Range(typeof(DateTime), "1/2/2000", "3/4/3000")]
         public DateTime ReleaseDate { get; set; }

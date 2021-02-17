@@ -11,14 +11,14 @@ namespace GBCSporting2021_PepperoniPizza420.Models
     {
         public int RegistrationId { get; set; }
 
-        private Customer Customer { get; set; }
+        public Customer Customer { get; set; }
 
         [Key, Column(Order = 1)]
-        private int CostumerId { get; set; }
+        public int CustomerId { get; set; }
 
-        private Product Product { get; set; }
+        public Product Product { get; set; }
         
         [Key, Column(Order = 1)]
-        private int ProductId { get; set; }
+        public int ProductId { get; set; }
     }
 }
