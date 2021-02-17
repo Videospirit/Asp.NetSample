@@ -175,7 +175,7 @@ namespace GBCSporting2021_PepperoniPizza420.Models
                 },
                 new Technician
                 {
-                    TechnicianId = 1,
+                    TechnicianId = 3,
                     Name = "Thad",
                     Email = "thad@gmai.com",
                     Phone = "+1(333)333-3333"

@@ -13,7 +13,7 @@ namespace GBCSporting2021_PepperoniPizza420.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z]*$"), Required(ErrorMessage = "Please enter a Name."), StringLength(50)]
         public string Name { get; set; }
 
-#       //TODO: find the Email Address Regex
+       //TODO: find the Email Address Regex
         [RegularExpression(@"*"), Required(ErrorMessage = "Please enter a Email."), StringLength(50)]
         public string Email { get; set; }
 
