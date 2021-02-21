@@ -45,7 +45,5 @@ namespace GBCSporting2021_PepperoniPizza420.Models
         [Required(ErrorMessage = "Please enter a Phone Number in this format (647) 123-4321."), StringLength(50)]
         public string Phone { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
-
     }
 }
