@@ -18,8 +18,8 @@
         {
             <tr>
                 <td>@incident.Title</td>
-                <td>@incident.Customer</td>
-                <td>@incident.Product</td>
+                <td>@incident.Customer.FirstName</td>
+                <td>@incident.Product.Name</td>
                 <td>@incident.DateOpened </td>
                 <td>
                     <a asp-controller="Incident" asp-action="Edit">Edit</a>

@@ -4,19 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
-    public class IncidentsController : Controller
+    public class IncidentController : Controller
     {
         private SportsProContext context { get; set; }
-        public IncidentsController(SportsProContext ctx)
+        public IncidentController(SportsProContext ctx)
         {
             context = ctx;
         }
         public IActionResult Index()
         {
             var incidents = context.Incidents
+                .Include(i => i.Customer)
+                .Include(i => i.Product)
                 .OrderBy(i => i.DateOpened)
                 .ToList();
             return View(incidents);
