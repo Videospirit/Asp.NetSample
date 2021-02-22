@@ -1,0 +1,34 @@
+﻿@model List<Incident>
+@{
+    ViewBag.Title = "Incidents";
+}
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>DateOpened</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var incident in Model)
+        {
+            <tr>
+                <td>@incident.Title</td>
+                <td>@incident.Customer</td>
+                <td>@incident.Product</td>
+                <td>@incident.DateOpened </td>
+                <td>
+                    <a asp-controller="Incident" asp-action="Edit">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Incident" asp-action="Delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

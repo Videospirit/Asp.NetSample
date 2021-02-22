@@ -77,3 +77,10 @@ C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\bin\Debu
 C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\GBCSporting2021_PepperoniPizza420.Views.pdb
 C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\GBCSporting2021_PepperoniPizza420.genruntimeconfig.cache
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Country\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Incident\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Registration\Index.cshtml.g.cs
+C:\Users\simon\Dev\assignment1-webdev\GBCSporting2021_PepperoniPizza420\obj\Debug\netcoreapp3.1\Razor\Views\Technician\Index.cshtml.g.cs

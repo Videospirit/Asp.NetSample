@@ -1,0 +1,24 @@
+﻿@model List<Country>
+@{
+    ViewBag.Title = "Countries";
+ }
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr><th>ID</th><th>Name</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@country.CountryId</td>
+                <td>@country.Name</td>
+                <td>
+                    <a asp-controller="Country" asp-action="Edit">Edit</a>
+                    <a asp-controller="Country" asp-action="Delete">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GBCSporting2021_PepperoniPizza420.Migrations
 {
-    [DbContext(typeof(ProductContext))]
-    partial class ProductContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SportsProContext))]
+    partial class SportsProContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -197,8 +197,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 1,
                             CustomerId = 1,
-                            DateClosed = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(5742),
-                            DateOpened = new DateTime(2021, 2, 16, 19, 10, 36, 552, DateTimeKind.Local).AddTicks(7339),
+                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(7176),
+                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 205, DateTimeKind.Local).AddTicks(6488),
                             Description = "This is an incident",
                             ProductId = 1,
                             TechnicianId = 1,
@@ -208,8 +208,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 2,
                             CustomerId = 2,
-                            DateClosed = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6531),
-                            DateOpened = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6501),
+                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8068),
+                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8023),
                             Description = "This is another incident",
                             ProductId = 2,
                             TechnicianId = 2,
@@ -219,8 +219,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 3,
                             CustomerId = 3,
-                            DateClosed = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6551),
-                            DateOpened = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6548),
+                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8083),
+                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8080),
                             Description = "This is not an incident (jk)",
                             ProductId = 3,
                             TechnicianId = 3,
@@ -239,9 +239,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -255,8 +252,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Products");
 
                     b.HasData(
@@ -266,7 +261,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "H3LL0W0RLD",
                             Name = "Pizza",
                             Price = 4.2000000000000002,
-                            ReleaseDate = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9435)
+                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(1418)
                         },
                         new
                         {
@@ -274,7 +269,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "W0RLDH3LL0",
                             Name = "Pepperoni",
                             Price = 69.989999999999995,
-                            ReleaseDate = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9949)
+                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2031)
                         },
                         new
                         {
@@ -282,7 +277,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "IDKWTPH",
                             Name = "Ham",
                             Price = 77.700000000000003,
-                            ReleaseDate = new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9969)
+                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2050)
                         });
                 });
 
@@ -412,13 +407,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                     b.Navigation("Technician");
                 });
 
-            modelBuilder.Entity("GBCSporting2021_PepperoniPizza420.Models.Product", b =>
-                {
-                    b.HasOne("GBCSporting2021_PepperoniPizza420.Models.Customer", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CustomerId");
-                });
-
             modelBuilder.Entity("GBCSporting2021_PepperoniPizza420.Models.Registration", b =>
                 {
                     b.HasOne("GBCSporting2021_PepperoniPizza420.Models.Customer", "Customer")
@@ -440,8 +428,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
 
             modelBuilder.Entity("GBCSporting2021_PepperoniPizza420.Models.Customer", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("Registrations");
                 });
 

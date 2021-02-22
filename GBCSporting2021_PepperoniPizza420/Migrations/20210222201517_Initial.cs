@@ -21,6 +21,22 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Technicians",
                 columns: table => new
                 {
@@ -60,29 +76,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         principalTable: "Countries",
                         principalColumn: "CountryId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK_Products_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,12 +152,12 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "Code", "CustomerId", "Name", "Price", "ReleaseDate" },
+                columns: new[] { "ProductId", "Code", "Name", "Price", "ReleaseDate" },
                 values: new object[,]
                 {
-                    { 1, "H3LL0W0RLD", null, "Pizza", 4.2000000000000002, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9435) },
-                    { 2, "W0RLDH3LL0", null, "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9949) },
-                    { 3, "IDKWTPH", null, "Ham", 77.700000000000003, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(9969) }
+                    { 1, "H3LL0W0RLD", "Pizza", 4.2000000000000002, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(1418) },
+                    { 2, "W0RLDH3LL0", "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2031) },
+                    { 3, "IDKWTPH", "Ham", 77.700000000000003, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2050) }
                 });
 
             migrationBuilder.InsertData(
@@ -197,9 +190,9 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 columns: new[] { "IncidentId", "CustomerId", "DateClosed", "DateOpened", "Description", "ProductId", "TechnicianId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(5742), new DateTime(2021, 2, 16, 19, 10, 36, 552, DateTimeKind.Local).AddTicks(7339), "This is an incident", 1, 1, "Title 1" },
-                    { 2, 2, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6531), new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6501), "This is another incident", 2, 2, "Title 2" },
-                    { 3, 3, new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6551), new DateTime(2021, 2, 16, 19, 10, 36, 555, DateTimeKind.Local).AddTicks(6548), "This is not an incident (jk)", 3, 3, "Title 3" }
+                    { 1, 1, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(7176), new DateTime(2021, 2, 22, 15, 15, 17, 205, DateTimeKind.Local).AddTicks(6488), "This is an incident", 1, 1, "Title 1" },
+                    { 2, 2, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8068), new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8023), "This is another incident", 2, 2, "Title 2" },
+                    { 3, 3, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8083), new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8080), "This is not an incident (jk)", 3, 3, "Title 3" }
                 });
 
             migrationBuilder.InsertData(
@@ -233,11 +226,6 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 column: "TechnicianId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CustomerId",
-                table: "Products",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Registrations_ProductId",
                 table: "Registrations",
                 column: "ProductId");
@@ -255,10 +243,10 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 name: "Technicians");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Countries");

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GBCSporting2021_PepperoniPizza420.Models
 {
-    public class ProductContext : DbContext
+    public class SportsProContext : DbContext
     {
-        public ProductContext(DbContextOptions<ProductContext> options) : base(options) { }
+        public SportsProContext(DbContextOptions<SportsProContext> options) : base(options) { }
 
         public DbSet<Country> Countries { get; set; }
 

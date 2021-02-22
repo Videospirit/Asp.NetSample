@@ -32,8 +32,8 @@ namespace GBCSporting2021_PepperoniPizza420
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<ProductContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
+            services.AddDbContext<SportsProContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SportsProContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
