@@ -1,4 +1,4 @@
-﻿@model List<Incident>
+﻿@model IEnumerable<Incident>
 @{
     ViewBag.Title = "Incidents";
 }
@@ -22,13 +22,19 @@
                 <td>@incident.Product.Name</td>
                 <td>@incident.DateOpened </td>
                 <td>
-                    <a asp-controller="Incident" asp-action="Edit">Edit</a>
+                    <a asp-controller="Incident" asp-action="Edit" asp-route-id="@incident.IncidentId">Edit</a>
                 </td>
                 <td>
-                    <a asp-controller="Incident" asp-action="Delete">Delete</a>
+                    <a asp-controller="Incident" asp-action="Delete" asp-route-id="@incident.IncidentId">Delete</a>
+                </td>
+                <td>
+                    <a asp-controller="Incident" asp-action="Details" asp-route-id="@incident.IncidentId">Details</a>
                 </td>
             </tr>
         }
+
     </tbody>
 
+
 </table>
+<a asp-controller="Incident" asp-action="Add">Add</a>

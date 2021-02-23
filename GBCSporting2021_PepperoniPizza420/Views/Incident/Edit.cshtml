@@ -1,0 +1,64 @@
+﻿@model Incident
+@{
+    string title = ViewBag.Action + " Incident";
+    ViewBag.Title = title;
+}
+
+
+<h1>@title</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="CustomerId">Customer</label>
+        <select asp-for="CustomerId">
+            <option value="@Model.CustomerId">Select Customer</option>
+            @foreach (Customer cus in ViewBag.Customers)
+            {
+                <option value="@cus.CustomerId">@cus.FirstName + @cus.LastName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="Product">Product</label>
+        <select asp-for="Product">
+            <option value="">Select Product</option>
+            @foreach (Product prod in ViewBag.Products)
+            {
+                <option value="@prod.Name">@prod.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title">
+    </div>
+    <div>
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description">
+    </div>
+    <div>
+        <label asp-for="Title">Title</label>
+        <select asp-for="Technician">
+            <option value="">Select Technician</option>
+            @foreach (Technician tec in ViewBag.Technicians)
+            {
+                <option value="@tec.TechnicianId">@tec.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <input asp-for="DateOpened" />@DateTime.Now
+    </div>
+    <div>
+        <input asp-for="DateClosed" />
+    </div>
+    <input type ="hidden" asp-for="IncidentId"/>
+
+    <button type="submit">@ViewBag.Action</button>
+    <a asp-controller="Incident" asp-action="Index">Cancel</a>
+
+
+
+</form>

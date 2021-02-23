@@ -1,0 +1,35 @@
+﻿@model Incident
+
+@{
+    string title = "Incident Details";
+    ViewBag.Title = title;
+}
+
+<h1>@title</h1>
+
+
+<div>
+    <div>
+        <p>@Model.Customer</p>
+    </div>
+
+    <div>
+        <p>@Model.Product</p>
+    </div>
+
+    <div>
+        <p>@Model.Description</p>
+    </div>
+
+    <div>
+        <p>@Model.Technician</p>
+    </div>
+
+    <div>
+        <p>@Model.DateOpened</p>
+    </div>
+    <div>
+        <p>@Model.DateClosed</p>
+    </div>
+</div>
+<a asp-controller="Incident" asp-action="Index">Back to Incident Manager</a>

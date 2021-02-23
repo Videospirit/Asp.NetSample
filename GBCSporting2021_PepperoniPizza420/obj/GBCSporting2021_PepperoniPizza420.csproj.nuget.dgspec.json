@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj": {}
+    "C:\\Users\\dunca\\source\\repos\\assignment1-webdev\\FEB22\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj": {
+    "C:\\Users\\dunca\\source\\repos\\assignment1-webdev\\FEB22\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
+        "projectUniqueName": "C:\\Users\\dunca\\source\\repos\\assignment1-webdev\\FEB22\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
         "projectName": "GBCSporting2021_PepperoniPizza420",
-        "projectPath": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
-        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\Dev\\assignment1-webdev\\GBCSporting2021_PepperoniPizza420\\obj\\",
+        "projectPath": "C:\\Users\\dunca\\source\\repos\\assignment1-webdev\\FEB22\\GBCSporting2021_PepperoniPizza420\\GBCSporting2021_PepperoniPizza420.csproj",
+        "packagesPath": "C:\\Users\\dunca\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dunca\\source\\repos\\assignment1-webdev\\FEB22\\GBCSporting2021_PepperoniPizza420\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dunca\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.DataAnnotations": {
               "target": "Package",
@@ -75,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
