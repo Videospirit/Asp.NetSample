@@ -59,6 +59,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
             return View(incident);
         }
+
         [HttpPost]
         public IActionResult Edit(Incident inc)
         {
@@ -85,6 +86,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 return View(inc);
             }
         }
+
         [HttpGet]
         public IActionResult Delete(int id)
         {

@@ -24,13 +24,12 @@ namespace GBCSporting2021_PepperoniPizza420.Models
                
         public int? TechnicianId  { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$"), Required(ErrorMessage = "Please enter a FirstName."), StringLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z_ ]*$"), Required(ErrorMessage = "Please enter a FirstName."), StringLength(50)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Please enter a Description.")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Please enter a DateOpened.")]
         public DateTime? DateOpened { get; set; }
         public DateTime? DateClosed { get; set; }
 
