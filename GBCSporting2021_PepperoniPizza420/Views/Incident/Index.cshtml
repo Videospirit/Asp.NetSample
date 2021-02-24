@@ -1,4 +1,4 @@
-﻿@model List<Incident>
+﻿@model IEnumerable<Incident>
 @{
     ViewBag.Title = "Incidents";
 }
@@ -10,25 +10,33 @@
             <th>Title</th>
             <th>Customer</th>
             <th>Product</th>
-            <th>DateOpened</th>
+            <th>Date Opened</th>
+            <th>Date Closed</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var incident in Model)
         {
-            <tr>
-                <td>@incident.Title</td>
-                <td>@incident.Customer.FirstName</td>
-                <td>@incident.Product.Name</td>
-                <td>@incident.DateOpened </td>
-                <td>
-                    <a asp-controller="Incident" asp-action="Edit">Edit</a>
-                </td>
-                <td>
-                    <a asp-controller="Incident" asp-action="Delete">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@incident.Title</td>
+            <td>@incident.Customer.FirstName</td>
+            <td>@incident.Product.Name</td>
+            <td>@incident.DateOpened </td>
+            <td>@incident.DateClosed </td>
+            <td>
+                <a asp-controller="Incident" asp-action="Edit" asp-route-id="@incident.IncidentId">Edit</a>
+            </td>
+            <td>
+                <a asp-controller="Incident" asp-action="Delete" asp-route-id="@incident.IncidentId">Delete</a>
+            </td>
+            <td>
+                <a asp-controller="Incident" asp-action="Details" asp-route-id="@incident.IncidentId">Details</a>
+            </td>
+        </tr>
         }
+
     </tbody>
 
+
 </table>
+<a asp-controller="Incident" asp-action="Add">Add</a>

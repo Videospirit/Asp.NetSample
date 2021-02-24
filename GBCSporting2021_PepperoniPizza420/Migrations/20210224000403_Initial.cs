@@ -86,10 +86,10 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    TechnicianId = table.Column<int>(type: "int", nullable: false),
+                    TechnicianId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOpened = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOpened = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateClosed = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -112,7 +112,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         column: x => x.TechnicianId,
                         principalTable: "Technicians",
                         principalColumn: "TechnicianId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,9 +155,9 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 columns: new[] { "ProductId", "Code", "Name", "Price", "ReleaseDate" },
                 values: new object[,]
                 {
-                    { 1, "H3LL0W0RLD", "Pizza", 4.2000000000000002, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(1418) },
-                    { 2, "W0RLDH3LL0", "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2031) },
-                    { 3, "IDKWTPH", "Ham", 77.700000000000003, new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2050) }
+                    { 1, "H3LL0W0RLD", "Pizza", 4.2000000000000002, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(595) },
+                    { 2, "W0RLDH3LL0", "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1105) },
+                    { 3, "IDKWTPH", "Ham", 77.700000000000003, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1126) }
                 });
 
             migrationBuilder.InsertData(
@@ -190,9 +190,9 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 columns: new[] { "IncidentId", "CustomerId", "DateClosed", "DateOpened", "Description", "ProductId", "TechnicianId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(7176), new DateTime(2021, 2, 22, 15, 15, 17, 205, DateTimeKind.Local).AddTicks(6488), "This is an incident", 1, 1, "Title 1" },
-                    { 2, 2, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8068), new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8023), "This is another incident", 2, 2, "Title 2" },
-                    { 3, 3, new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8083), new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8080), "This is not an incident (jk)", 3, 3, "Title 3" }
+                    { 1, 1, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7044), new DateTime(2021, 2, 23, 19, 4, 3, 78, DateTimeKind.Local).AddTicks(6855), "This is an incident", 1, 1, "Title 1" },
+                    { 2, 2, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7758), new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7722), "This is another incident", 2, 2, "Title 2" },
+                    { 3, 3, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7771), new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7768), "This is not an incident (jk)", 3, 3, "Title 3" }
                 });
 
             migrationBuilder.InsertData(

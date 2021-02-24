@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GBCSporting2021_PepperoniPizza420.Migrations
 {
     [DbContext(typeof(SportsProContext))]
-    [Migration("20210222201517_Initial")]
+    [Migration("20210224000403_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,7 +166,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                     b.Property<DateTime?>("DateClosed")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOpened")
+                    b.Property<DateTime?>("DateOpened")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -176,7 +176,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TechnicianId")
+                    b.Property<int?>("TechnicianId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -199,8 +199,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 1,
                             CustomerId = 1,
-                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(7176),
-                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 205, DateTimeKind.Local).AddTicks(6488),
+                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7044),
+                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 78, DateTimeKind.Local).AddTicks(6855),
                             Description = "This is an incident",
                             ProductId = 1,
                             TechnicianId = 1,
@@ -210,8 +210,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 2,
                             CustomerId = 2,
-                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8068),
-                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8023),
+                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7758),
+                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7722),
                             Description = "This is another incident",
                             ProductId = 2,
                             TechnicianId = 2,
@@ -221,8 +221,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 3,
                             CustomerId = 3,
-                            DateClosed = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8083),
-                            DateOpened = new DateTime(2021, 2, 22, 15, 15, 17, 208, DateTimeKind.Local).AddTicks(8080),
+                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7771),
+                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7768),
                             Description = "This is not an incident (jk)",
                             ProductId = 3,
                             TechnicianId = 3,
@@ -263,7 +263,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "H3LL0W0RLD",
                             Name = "Pizza",
                             Price = 4.2000000000000002,
-                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(1418)
+                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(595)
                         },
                         new
                         {
@@ -271,7 +271,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "W0RLDH3LL0",
                             Name = "Pepperoni",
                             Price = 69.989999999999995,
-                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2031)
+                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1105)
                         },
                         new
                         {
@@ -279,7 +279,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "IDKWTPH",
                             Name = "Ham",
                             Price = 77.700000000000003,
-                            ReleaseDate = new DateTime(2021, 2, 22, 15, 15, 17, 209, DateTimeKind.Local).AddTicks(2050)
+                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1126)
                         });
                 });
 
@@ -398,9 +398,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
 
                     b.HasOne("GBCSporting2021_PepperoniPizza420.Models.Technician", "Technician")
                         .WithMany()
-                        .HasForeignKey("TechnicianId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TechnicianId");
 
                     b.Navigation("Customer");
 

@@ -24,52 +24,85 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 .ToList();
             return View(incidents);
         }
-        public IActionResult Add(Incident inc)
+        public IActionResult Details(int id)
         {
+            var incident = context.Incidents
+               .Include(i => i.Customer)
+               .Include(i => i.Product)
+               .FirstOrDefault(i => i.IncidentId == id);
+
+            return View(incident);
+        }
+        [HttpGet]
+        public IActionResult Add()
+        {
+           
             ViewBag.Action = "Add";
-            ViewBag.Incidents = context.Incidents.OrderBy(i => i.DateOpened).ToList();
+            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
+            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
+            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
             return View("Edit", new Incident());
         }
+        
         [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.Incidents = context.Incidents.OrderBy(i => i.Title).ToList();
-            var inc = context.Incidents.Find(id);
-            return View(inc);
+            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
+            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
+            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+
+            var incident = context.Incidents
+              .Include(i => i.Customer)
+              .Include(i => i.Product)
+              .First(i => i.IncidentId == id);
+
+            return View(incident);
         }
+
         [HttpPost]
         public IActionResult Edit(Incident inc)
         {
+            string action = (inc.IncidentId == 0) ? "Add" : "Edit";
             if (ModelState.IsValid)
             {
-                if (inc.IncidentId == 0)
+                if (action == "Add")
+                {
+                    
                     context.Incidents.Add(inc);
+                }
                 else
+                {
                     context.Incidents.Update(inc);
+                }
                 context.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Incident");
 
             }
             else
             {
-                ViewBag.Action = (inc.IncidentId == 0) ? "Add" : "Edit";
+                ViewBag.Action = action;
                 ViewBag.Incidents = context.Incidents.OrderBy(i => i.Title).ToList();
                 return View(inc);
             }
         }
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var inc = context.Incidents.Find(id);
-            return View(inc);
+            var incident = context.Incidents
+              .Include(i => i.Customer)
+              .Include(i => i.Product)
+              .FirstOrDefault(i => i.IncidentId == id);
+
+            return View(incident);
         }
         [HttpPost]
         public IActionResult Delete(Incident inc)
         {
             context.Incidents.Remove(inc);
             context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Incident");
         }
     }
 }
