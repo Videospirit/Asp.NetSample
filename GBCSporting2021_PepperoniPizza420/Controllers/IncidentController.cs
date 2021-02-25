@@ -29,6 +29,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             var incident = context.Incidents
                .Include(i => i.Customer)
                .Include(i => i.Product)
+               .Include(i => i.Technician)
                .FirstOrDefault(i => i.IncidentId == id);
 
             return View(incident);
