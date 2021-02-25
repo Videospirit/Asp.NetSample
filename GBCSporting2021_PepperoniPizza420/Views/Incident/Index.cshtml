@@ -4,21 +4,24 @@
 }
 
 
-<table>
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Customer</th>
-            <th>Product</th>
-            <th>Date Opened</th>
-            <th>Date Closed</th>
+            <th scope="col">Title</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Product</th>
+            <th scope="col">Date Opened</th>
+            <th scope="col">Date Closed</th>
+            <th scope="col">EDIT</th>
+            <th scope="col">DELETE</th>
+            <th scope="col">DETAILS</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var incident in Model)
         {
         <tr>
-            <td>@incident.Title</td>
+            <td scope="row">@incident.Title</td>
             <td>@incident.Customer.FirstName</td>
             <td>@incident.Product.Name</td>
             <td>@incident.DateOpened </td>
@@ -39,4 +42,5 @@
 
 
 </table>
-<a asp-controller="Incident" asp-action="Add">Add</a>
+
+<a asp-controller="Incident" asp-action="Add" class="btn btn-primary">Add Incident</a>

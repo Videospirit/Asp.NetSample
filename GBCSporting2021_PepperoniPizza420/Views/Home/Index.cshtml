@@ -1,5 +1,20 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
+<div class="container-md">
+    <h2>Admin</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><a asp-controller="Product" asp-action="Index" class="btn btn-link">Manage Products</a>
+        <li class="list-group-item"><a asp-controller="Technician" asp-action="Index" class="btn btn-link">Manage Technicians</a>
+        <li class="list-group-item"><a asp-controller="Customer" asp-action="Index" class="btn btn-link">Manage Customers</a>
+        <li class="list-group-item"><a asp-controller="Incident" asp-action="Index" class="btn btn-link">Manage Incidents</a>
+        <li class="list-group-item"><a asp-controller="Registration" asp-action="Index" class="btn btn-link">Manage Registrations</a>
+    </ul>
+</div>
 
-<a asp-controller="Country" asp-action="Index">Countries</a>
+<div class="container-md my-3">
+    <h2>Technicians</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><a asp-controller="Incident" asp-action="Index" class="btn btn-link">Update Incident</a>
+    </ul>
+</div>

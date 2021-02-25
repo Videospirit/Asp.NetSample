@@ -36,7 +36,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-           
             ViewBag.Action = "Add";
             ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
             ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
