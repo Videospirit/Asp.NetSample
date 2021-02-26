@@ -3,48 +3,50 @@
     ViewBag.Title = "Technician Manager";
 }
 
-<div class="align-bottom">
-    <div class="progress bg-white">
-        <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="container-fluid my-5">
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
     </div>
-</div>
 
-<div class="container-fluid bg-light rounded p-4">
-    <h1>Technician Manager</h1>
-    <table class="table table-hover my-3">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var technician in Model)
-            {
+    <div class="container-fluid bg-light rounded p-4">
+        <h1>Technician Manager</h1>
+        <table class="table table-hover my-3">
+            <thead class="thead-dark">
                 <tr>
-                    <td>@technician.Name</td>
-                    <td>@technician.Email</td>
-                    <td>@technician.Phone</td>
-                    <td>
-                        <a asp-controller="Technician" asp-action="Edit" asp-route-id="@technician.TechnicianId" class="btn btn-outline-success">Edit</a>
-                    </td>
-                    <td>
-                        <a asp-controller="Technician" asp-action="Delete" asp-route-id="@technician.TechnicianId" class="btn btn-danger">Delete</a>
-                    </td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var technician in Model)
+                {
+                    <tr>
+                        <td>@technician.Name</td>
+                        <td>@technician.Email</td>
+                        <td>@technician.Phone</td>
+                        <td>
+                            <a asp-controller="Technician" asp-action="Edit" asp-route-id="@technician.TechnicianId" class="btn btn-outline-success">Edit</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Technician" asp-action="Delete" asp-route-id="@technician.TechnicianId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a asp-controller="Technician" asp-action="Add" class="btn btn-primary">Add Technician</a>
-</div>
+        <a asp-controller="Technician" asp-action="Add" class="btn btn-primary">Add Technician</a>
+    </div>
 
-<div class="align-bottom">
-    <div class="progress bg-white">
-        <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
     </div>
 </div>
