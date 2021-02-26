@@ -4,11 +4,30 @@
     ViewBag.Title = "Delete Product";
 }
 
-<h1>You Are Deleting the Product:</h1>
-<h2>Code: @Model.Code   Name: @Model.Name</h2>
+<div class="container bg-light rounded p-4">
+    <h1>Confirm Product Deletion</h1>
+    <table class="table table-bordered table-hover my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Code</td>
+                <td>@Model.Name</td>
+                <td>$@Model.Price</td>
+                <td>@Model.ReleaseDate</td>
+            </tr>
+        </tbody>
+    </table>
 
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="ProductId" />
-    <button type="submit" class=" btn btn-primary"> Delete</button>
-    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Cancel</a>
-</form>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ProductId" />
+        <button type="submit" class=" btn btn-success"> Delete</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-danger">Cancel</a>
+    </form>
+</div>

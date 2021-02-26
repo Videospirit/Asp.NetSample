@@ -2,12 +2,30 @@
 @{
     ViewBag.Title = "Delete Customer";
 }
+<div class="container bg-light rounded p-4">
+    <h2>Confirm Deletion</h2>
+    <table class="table table-bordered table-hover my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Customer</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.FirstName @Model.LastName</td>
+                <td>@Model.PostalCode</td>
+                <td>@Model.Email</td>
+                <td>@Model.Phone</td>
+            </tr>
+        </tbody>
+    </table>
 
-<h2>Confirm Deletion</h2>
-<h3>@Model.FirstName @Model.LastName</h3>
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="CustomerId" />
-
-    <button type="submit" class="btn btn-primary">Delete</button>
-    <a asp-controller="Customer" asp-action="Index" class="btn btn-primary">Cancel</a>
-</form>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="CustomerId" />
+        <button type="submit" class="btn btn-success">Delete</button>
+        <a asp-controller="Customer" asp-action="Index" class="btn btn-danger">Cancel</a>
+    </form>
+</div>

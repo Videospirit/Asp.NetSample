@@ -3,18 +3,25 @@
     ViewBag.Title = "Incidents";
 }
 
+<div class="align-bottom">
+    <div class="progress bg-white">
+        <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>
 
-<table class="table table-hover">
-    <thead>
+<div class="container-fluid bg-light rounded p-4">
+    <h1>Incidents</h1>
+<table class="table table-hover my-3">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Customer</th>
             <th scope="col">Product</th>
             <th scope="col">Date Opened</th>
             <th scope="col">Date Closed</th>
-            <th scope="col">EDIT</th>
-            <th scope="col">DELETE</th>
-            <th scope="col">DETAILS</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Details</th>
         </tr>
     </thead>
     <tbody>
@@ -24,16 +31,16 @@
             <td scope="row">@incident.Title</td>
             <td>@incident.Customer.FirstName</td>
             <td>@incident.Product.Name</td>
-            <td>@incident.DateOpened </td>
+            <td>@incident.DateOpened</td>
             <td>@incident.DateClosed </td>
             <td>
-                <a asp-controller="Incident" asp-action="Edit" asp-route-id="@incident.IncidentId">Edit</a>
+                <a asp-controller="Incident" asp-action="Edit" asp-route-id="@incident.IncidentId" class="btn btn-outline-success">Edit</a>
             </td>
             <td>
-                <a asp-controller="Incident" asp-action="Delete" asp-route-id="@incident.IncidentId">Delete</a>
+                <a asp-controller="Incident" asp-action="Delete" asp-route-id="@incident.IncidentId" class="btn btn-danger">Delete</a>
             </td>
             <td>
-                <a asp-controller="Incident" asp-action="Details" asp-route-id="@incident.IncidentId">Details</a>
+                <a asp-controller="Incident" asp-action="Details" asp-route-id="@incident.IncidentId" class="btn btn-primary">Details</a>
             </td>
         </tr>
         }
@@ -44,3 +51,10 @@
 </table>
 
 <a asp-controller="Incident" asp-action="Add" class="btn btn-primary">Add Incident</a>
+</div>
+
+<div class="align-bottom">
+    <div class="progress bg-white">
+        <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>

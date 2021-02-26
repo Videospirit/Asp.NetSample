@@ -3,14 +3,31 @@
     string title = "Delete Technician";
     ViewBag.Title = title;
 }
+<div class="container bg-light rounded p-4">
+    <h2>Confirm Technician Deletion</h2>
 
-<h2>Confirm Deletion</h2>
-<p>@Model.Name</p>
+    <table class="table table-bordered table-hover my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>@Model.Name</th>
+                <th>@Model.Email</th>
+                <th>@Model.Phone</th>
+            </tr>
+        </tbody>
+    </table>
 
-<form asp-action="Delete">
-    <input type="hidden" asp-for="TechnicianId" />
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="TechnicianId" />
 
-    <button type="submit">Delete</button>
-    <a asp-controller="Technician" asp-action="Index">Cancel</a>
+            <button type="submit" class="btn btn-success">Delete</button>
+            <a asp-controller="Technician" asp-action="Index" class="btn btn-danger">Cancel</a>
 
-</form>
+        </form>
+</div>

@@ -5,31 +5,31 @@
     ViewBag.Title = title;
 }
 
+
+<div class="container bg-light rounded p-4">
 <h1>@title</h1>
 
-
-<div>
-    <div>
-        <p>@Model.Customer.FirstName @Model.Customer.LastName</p>
-    </div>
-
-    <div>
-        <p>@Model.Product</p>
-    </div>
-
-    <div>
-        <p>@Model.Description</p>
-    </div>
-
-    <div>
-        <p>@Model.Technician.Name</p>
-    </div>
-
-    <div>
-        <p>@Model.DateOpened</p>
-    </div>
-    <div>
-        <p>@Model.DateClosed</p>
-    </div>
+    <table class="table table-bordered table-light my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Customer Name</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Technician Name</th>
+                <th>Date Opened</th>
+                <th>Date Closed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Customer.FirstName @Model.Customer.LastName</td>
+                <td>@Model.Product.Name</td>
+                <td>@Model.Description</td>
+                <td>@Model.Technician.Name</td>
+                <td>@Model.DateOpened</td>
+                <td>@Model.DateClosed</td>
+            </tr>
+        </tbody>
+    </table>
+    <a asp-controller="Incident" asp-action="Index" class="btn btn-primary">Back to Incident Manager</a>
 </div>
-<a asp-controller="Incident" asp-action="Index">Back to Incident Manager</a>
