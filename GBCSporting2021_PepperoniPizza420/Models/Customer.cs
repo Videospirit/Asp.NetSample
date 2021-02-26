@@ -38,10 +38,10 @@ namespace GBCSporting2021_PepperoniPizza420.Models
         [Required(ErrorMessage = "Please enter a PostalCode."), StringLength(50)]
         public string PostalCode { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         // TODO: find regular expression for Phone number
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
     }
 }

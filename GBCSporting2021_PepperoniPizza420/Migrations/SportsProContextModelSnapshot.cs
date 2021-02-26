@@ -74,9 +74,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -89,9 +87,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -197,8 +193,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 1,
                             CustomerId = 1,
-                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7044),
-                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 78, DateTimeKind.Local).AddTicks(6855),
+                            DateClosed = new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6196),
+                            DateOpened = new DateTime(2021, 2, 25, 14, 53, 7, 320, DateTimeKind.Local).AddTicks(7675),
                             Description = "This is an incident",
                             ProductId = 1,
                             TechnicianId = 1,
@@ -208,8 +204,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 2,
                             CustomerId = 2,
-                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7758),
-                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7722),
+                            DateClosed = new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6995),
+                            DateOpened = new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6958),
                             Description = "This is another incident",
                             ProductId = 2,
                             TechnicianId = 2,
@@ -219,8 +215,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                         {
                             IncidentId = 3,
                             CustomerId = 3,
-                            DateClosed = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7771),
-                            DateOpened = new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7768),
+                            DateClosed = new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(7008),
+                            DateOpened = new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(7005),
                             Description = "This is not an incident (jk)",
                             ProductId = 3,
                             TechnicianId = 3,
@@ -261,7 +257,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "H3LL0W0RLD",
                             Name = "Pizza",
                             Price = 4.2000000000000002,
-                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(595)
+                            ReleaseDate = new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(395)
                         },
                         new
                         {
@@ -269,7 +265,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "W0RLDH3LL0",
                             Name = "Pepperoni",
                             Price = 69.989999999999995,
-                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1105)
+                            ReleaseDate = new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(1143)
                         },
                         new
                         {
@@ -277,7 +273,7 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                             Code = "IDKWTPH",
                             Name = "Ham",
                             Price = 77.700000000000003,
-                            ReleaseDate = new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1126)
+                            ReleaseDate = new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(1163)
                         });
                 });
 

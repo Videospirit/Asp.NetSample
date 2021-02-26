@@ -64,8 +64,8 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,9 +155,9 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 columns: new[] { "ProductId", "Code", "Name", "Price", "ReleaseDate" },
                 values: new object[,]
                 {
-                    { 1, "H3LL0W0RLD", "Pizza", 4.2000000000000002, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(595) },
-                    { 2, "W0RLDH3LL0", "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1105) },
-                    { 3, "IDKWTPH", "Ham", 77.700000000000003, new DateTime(2021, 2, 23, 19, 4, 3, 82, DateTimeKind.Local).AddTicks(1126) }
+                    { 1, "H3LL0W0RLD", "Pizza", 4.2000000000000002, new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(395) },
+                    { 2, "W0RLDH3LL0", "Pepperoni", 69.989999999999995, new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(1143) },
+                    { 3, "IDKWTPH", "Ham", 77.700000000000003, new DateTime(2021, 2, 25, 14, 53, 7, 324, DateTimeKind.Local).AddTicks(1163) }
                 });
 
             migrationBuilder.InsertData(
@@ -190,9 +190,9 @@ namespace GBCSporting2021_PepperoniPizza420.Migrations
                 columns: new[] { "IncidentId", "CustomerId", "DateClosed", "DateOpened", "Description", "ProductId", "TechnicianId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7044), new DateTime(2021, 2, 23, 19, 4, 3, 78, DateTimeKind.Local).AddTicks(6855), "This is an incident", 1, 1, "Title 1" },
-                    { 2, 2, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7758), new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7722), "This is another incident", 2, 2, "Title 2" },
-                    { 3, 3, new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7771), new DateTime(2021, 2, 23, 19, 4, 3, 81, DateTimeKind.Local).AddTicks(7768), "This is not an incident (jk)", 3, 3, "Title 3" }
+                    { 1, 1, new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6196), new DateTime(2021, 2, 25, 14, 53, 7, 320, DateTimeKind.Local).AddTicks(7675), "This is an incident", 1, 1, "Title 1" },
+                    { 2, 2, new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6995), new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(6958), "This is another incident", 2, 2, "Title 2" },
+                    { 3, 3, new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(7008), new DateTime(2021, 2, 25, 14, 53, 7, 323, DateTimeKind.Local).AddTicks(7005), "This is not an incident (jk)", 3, 3, "Title 3" }
                 });
 
             migrationBuilder.InsertData(
