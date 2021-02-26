@@ -3,14 +3,34 @@
     string title = "Delete Incident";
     ViewBag.Title = title;
 }
+<div class="d-flex align-items-center justify-content-center my-xl-5">
+    <div class="container bg-light rounded my-5 p-4 box-shadow">
+        <h1>Confirm Incident Deletion</h1>
+        <table class="table table-bordered table-hover my-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Date Opened</th>
+                    <th scope="col">Date Closed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Title</td>
+                    <td>@Model.Customer.FirstName @Model.Customer.LastName</td>
+                    <td>@Model.Product.Name</td>
+                    <td>@Model.DateOpened</td>
+                    <td>@Model.DateClosed</td>
+                </tr>
+            </tbody>
+        </table>
 
-<h2>Confirm Deletion</h2>
-<h3>@Model.Title</h3>
-
-<form asp-action="Delete">
-    <input type="hidden" asp-for="IncidentId" />
-
-    <button type="submit" >Delete</button>
-    <a asp-controller="Incident" asp-action="Index">Cancel</a>
-    
-</form>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IncidentId" />
+            <button type="submit" class="btn btn-success">Delete</button>
+            <a asp-controller="Incident" asp-action="Index" class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>

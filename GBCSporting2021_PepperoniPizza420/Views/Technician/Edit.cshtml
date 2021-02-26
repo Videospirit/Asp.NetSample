@@ -4,28 +4,29 @@
     ViewBag.Title = title;
 }
 
-<h1>@title</h1>
+<div class="container my-5">
+    <form asp-action="Edit" method="post" class="bg-light box-shadow rounded font-weight-bold p-4 my-3">
+    <h1>@title</h1>
+        <div asp-validation-summary="All"></div>
 
-<form asp-action="Edit" method="post">
-    <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="TechnicianId">Technician</label>
+            <input asp-for="Name" class="form-control" placeholder="Please Enter a Name">
+        </div>
 
-    <div>
-        <label asp-for="TechnicianId">Technician</label>
-        <input asp-for="Name">
-    </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" placeholder="Please Enter a Email">
+        </div>
 
-    <div>
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email">
-    </div>
+        <div class="form-group">
+            <label asp-for="Phone">Phone Number</label>
+            <input asp-for="Phone" class="form-control" placeholder="Please Enter a Phone Number">
+        </div>
 
-    <div>
-        <label asp-for="Phone">Phone Number</label>
-        <input asp-for="Phone">
-    </div>
+        <input type="hidden" asp-for="TechnicianId" />
 
-    <input type="hidden" asp-for="TechnicianId" />
-
-    <button type="submit">@ViewBag.Action</button>
-    <a asp-controller="Technician" asp-action="Index">Cancel</a>
-</form>
+        <button type="submit" class="btn btn-success">@ViewBag.Action</button>
+        <a asp-controller="Technician" asp-action="Index" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
