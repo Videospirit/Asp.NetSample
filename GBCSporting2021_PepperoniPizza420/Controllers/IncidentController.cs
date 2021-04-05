@@ -17,11 +17,37 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         }
         public IActionResult Index()
         {
-            var incidents = context.Incidents
-                .Include(i => i.Customer)
-                .Include(i => i.Product)
-                .OrderBy(i => i.DateOpened)
-                .ToList();
+            var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
+            ViewBag.Filter = filter;
+            var incidents = context.Incidents.ToList();
+
+            if (filter == "unassigned")
+            {
+                incidents = context.Incidents
+                    .Where(i => i.Technician == null)
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+            else if (filter == "open")
+            {
+                incidents = context.Incidents
+                    .Where(i => i.DateClosed == null)
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+            else 
+            {
+                incidents = context.Incidents
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+
             return View(incidents);
         }
         public IActionResult Details(int id)
