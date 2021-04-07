@@ -2,36 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
+
 namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : Controller 
     {
-        private SportsProContext context { get; set; }
+        public IProductRepository productRepository;
 
-        public ProductController(SportsProContext ctx)
+
+        
+        public ProductController(IProductRepository productRepo)
         {
-            context = ctx;
+            this.productRepository = productRepo;
         }
+       
         public IActionResult Index()
         {
-            var products = context.Products
-                .OrderBy(p => p.ReleaseDate)
-                .ToList();
+            var products = productRepository.GetAll();
             return View(products);
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(Product product)
         {
             ViewBag.Action = "Add";
-            ViewBag.Product = context.Products.OrderBy(p => p.Code).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.Name).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.Price).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.ReleaseDate).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Code).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Name).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Price).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.ReleaseDate).ToList();
+            productRepository.Add(product);
             return View("Edit", new Product());
         }
 
@@ -39,13 +44,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.Product = context.Products.OrderBy(p => p.Code).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.Name).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.Price).ToList();
-            ViewBag.Product = context.Products.OrderBy(p => p.ReleaseDate).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Code).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Name).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.Price).ToList();
+            ViewBag.Product = productRepository.GetAll().OrderBy(p => p.ReleaseDate).ToList();
 
-            var product = context.Products
-               .First(p => p.ProductId == id);
+            Product product = productRepository.GetById(id);
             return View(product);
         }
 
@@ -58,19 +62,21 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             {
                 if (action == "Add")
                 {
-                    context.Products.Add(product);
+                    
+                    productRepository.Add(product);
+                    productRepository.Save();
                 }
                 else
                 {
-                    context.Products.Update(product);
+                    productRepository.Update(product);
                 }
-                context.SaveChanges();
+                productRepository.Save();
                 return RedirectToAction("Index", "Product");
             }
             else
             {
                 ViewBag.Action = action;
-                ViewBag.Products = context.Products.OrderBy(p => p.ReleaseDate).ToList();
+                ViewBag.Products = productRepository.GetAll().OrderBy(p => p.ReleaseDate).ToList();
                 return View(product);
             }
 
@@ -80,8 +86,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
         public IActionResult Delete(int id)
         {
-            var product = context.Products
-                  .FirstOrDefault((p => p.ProductId == id));
+            var product = productRepository
+                  .GetById(id);
             return View(product);
         }
 
@@ -89,8 +95,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
         public IActionResult Delete(Product product)
         {
-            context.Products.Remove(product);
-            context.SaveChanges();
+            productRepository.Remove(product);
+            productRepository.Save();
             return RedirectToAction("Index", "Product");
         }
 
