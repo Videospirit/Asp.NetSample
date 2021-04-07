@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Registration>
+
+@{
+    string title = "Registrations";
+    ViewBag.Title = title;
+    var session = new CustomerSession(Context.Session);
+    var customer = session.GetCustomer();
+}
+
+<div class="container my-5 mb-5">
+    <h1>Customer: @customer.FirstName @customer.LastName</h1>
+    <h1>@title</h1>
+    <table>
+        <tr><td><b>Product</b></td><td></td></tr>
+        @foreach (Registration r in Model)
+        {
+            <tr>
+                <td> @r.Product.Name</td>
+                <td> <a asp-controller="Registration" asp-action="Delete"
+   asp-route-id="@r.ProductId" class="btn btn-danger">Delete</a>
+</td>
+            </tr>
+        }
+    </table>
+
+
+
+    <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Register" method="post">
+
+        <div class="form-group">
+            <label>Product</label>
+            <select id ="id" name="id" class="form-control">
+                @foreach (Product c in ViewBag.Products)
+                {
+                    <option value="@c.ProductId">@c.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+</div>
