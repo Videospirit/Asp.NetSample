@@ -19,44 +19,27 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         }
         public IActionResult Index()
         {
-<<<<<<< HEAD
-            var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
+            var filter = HttpContext.Request.Query["Filter"].ToString() == "" ? "all" : HttpContext.Request.Query["Filter"].ToString();
             ViewBag.Filter = filter;
-            var incidents = context.Incidents.ToList();
+
+            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
+                .OrderBy(i => i.DateOpened)
+                .ToList();
 
             if (filter == "unassigned")
             {
-                incidents = context.Incidents
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
                     .Where(i => i.Technician == null)
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
             else if (filter == "open")
             {
-                incidents = context.Incidents
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
                     .Where(i => i.DateClosed == null)
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
-            else 
-            {
-                incidents = context.Incidents
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
-                    .OrderBy(i => i.DateOpened)
-                    .ToList();
-            }
-
-=======
-            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
-                
-                .OrderBy(i => i.DateOpened)
-                .ToList();
->>>>>>> origin/main
             return View(incidents);
         }
         public IActionResult Details(int id)

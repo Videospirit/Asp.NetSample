@@ -95,8 +95,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
         public JsonResult CheckEmail(string email)
         {
-            bool hasEmail = context.Customers.Any(x => x.Email == email);
-            if (hasEmail)
+            var hasEmail = customerUnit.CustomerRepository.GetAll().FirstOrDefault(x => x.Email == email);
+            if (hasEmail != null)
                 return Json($"Email address {email} is already registered.");
             else
                 return Json(true);
