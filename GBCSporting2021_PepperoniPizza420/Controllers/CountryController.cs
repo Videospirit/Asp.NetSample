@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +10,16 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class CountryController : Controller
     {
-        private SportsProContext context { get; set; }
+        private ICountryRepository countryRepository;
+        
 
-        public CountryController(SportsProContext ctx)
+        public CountryController(ICountryRepository ctx)
         {
-            context = ctx;
+            this.countryRepository = ctx;
         }
         public IActionResult Index()
         {
-            var countries = context.Countries
+            var countries = countryRepository.GetAll()
                 .OrderBy(m => m.Name)
                 .ToList();
             return View(countries);
