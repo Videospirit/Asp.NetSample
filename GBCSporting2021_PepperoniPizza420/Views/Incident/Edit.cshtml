@@ -1,4 +1,4 @@
-﻿@model Incident
+﻿@model IncidentViewModel
 @{
     string title = ViewBag.Action + " Incident";
     ViewBag.Title = title;
@@ -11,55 +11,55 @@
         <div asp-validation-summary="All"></div>
 
         <div class="form-group">
-            <label asp-for="CustomerId" class="font-weight-bold">Customer</label>
-            <select asp-for="CustomerId" class="form-control">
-                <option value="@Model.CustomerId">Select Customer</option>
-                @foreach (Customer cus in ViewBag.Customers)
+            <label asp-for="CurrentIncident.CustomerId" class="font-weight-bold">Customer</label>
+            <select asp-for="CurrentIncident.CustomerId" class="form-control">
+                <option value="">Select Customer</option>
+                @foreach (Customer cus in Model.Customers)
                 {
                     <option value="@cus.CustomerId">@cus.FirstName + @cus.LastName</option>
                 }
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="ProductId" class="font-weight-bold">Product</label>
-            <select asp-for="ProductId" class="form-control">
+            <label asp-for="CurrentIncident.ProductId" class="font-weight-bold">Product</label>
+            <select asp-for="CurrentIncident.ProductId" class="form-control">
                 <option value="">Select Product</option>
-                @foreach (Product prod in ViewBag.Products)
+                @foreach (Product prod in Model.Products)
                 {
                     <option value="@prod.ProductId">@prod.Name</option>
                 }
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="Title" class="font-weight-bold">Title</label>
-            <input asp-for="Title" multiple class="form-control" placeholder="Please Enter a Title">
+            <label asp-for="CurrentIncident.Title" class="font-weight-bold">Title</label>
+            <input asp-for="CurrentIncident.Title" multiple class="form-control" placeholder="Please Enter a Title">
         </div>
         <div class="form-group">
             <label asp-for="Description" class="font-weight-bold">Description</label>
             <input asp-for="Description" class="form-control" placeholder="Please Enter a Description">
         </div>
         <div class="form-group">
-            <label asp-for="TechnicianId" class="font-weight-bold">Technician</label>
-            <select asp-for="TechnicianId" class="form-control">
+            <label asp-for="CurrentIncident.TechnicianId" class="font-weight-bold">Technician</label>
+            <select asp-for="CurrentIncident.TechnicianId" class="form-control">
                 <option value="">Select Technician</option>
-                @foreach (Technician tec in ViewBag.Technicians)
+                @foreach (Technician tec in Model.Technicians)
                 {
                     <option value="@tec.TechnicianId">@tec.Name</option>
                 }
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="DateOpened" class="font-weight-bold">Date Opened</label>
-            <input class="form-control" asp-for="DateOpened" />
+            <label asp-for="CurrentIncident.DateOpened" class="font-weight-bold">Date Opened</label>
+            <input class="form-control" asp-for="CurrentIncident.DateOpened" />
             <p>Current Date: @DateTime.Now</p>
         </div>
         <div class="form-group">
-            <label asp-for="DateClosed" class="font-weight-bold">Date Closed</label>
-            <input class="form-control" asp-for="DateClosed" />
+            <label asp-for="CurrentIncident.DateClosed" class="font-weight-bold">Date Closed</label>
+            <input class="form-control" asp-for="CurrentIncident.DateClosed" />
         </div>
         <input type="hidden" asp-for="IncidentId" />
 
-        <button type="submit" class="btn btn-success">@ViewBag.Action</button>
+        <button type="submit" class="btn btn-success">@Model.Action</button>
         <a asp-controller="Incident" asp-action="Index" class="btn btn-danger">Cancel</a>
 
 

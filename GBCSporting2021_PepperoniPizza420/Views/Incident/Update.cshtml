@@ -1,0 +1,25 @@
+﻿@model Incident
+
+@{
+    string title = "Incident Details";
+    ViewBag.Title = title;
+}
+
+<div class="d-flex align-items-center justify-content-center my-xl-5">
+    <div class="container bg-light rounded my-xl-5 p-4 box-shadow">
+        <div class="my-5">
+            <h1>@title</h1>
+            <div class="form-group">
+                <label asp-for="TechnicianId" class="font-weight-bold">Technician</label>
+                <select asp-for="TechnicianId" class="form-control">
+                    <option value="">Select Technician</option>
+                    @foreach (Technician tec in ViewBag.Technicians)
+                    {
+                        <option value="@tec.TechnicianId">@tec.Name</option>
+                    }
+                </select>
+            </div>
+            <a asp-controller="Incident" asp-action="Index" class="btn btn-primary">Back to Incident Manager</a>
+        </div>
+    </div>
+</div>

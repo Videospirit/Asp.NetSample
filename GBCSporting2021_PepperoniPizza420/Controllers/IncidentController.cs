@@ -17,12 +17,39 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         }
         public IActionResult Index()
         {
-            var incidents = context.Incidents
-                .Include(i => i.Customer)
-                .Include(i => i.Product)
-                .OrderBy(i => i.DateOpened)
-                .ToList();
-            return View(incidents);
+            var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
+            ViewBag.Filter = filter;
+            var incidents = context.Incidents.ToList();
+
+            if (filter == "unassigned")
+            {
+                incidents = context.Incidents
+                    .Where(i => i.Technician == null)
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+            else if (filter == "open")
+            {
+                incidents = context.Incidents
+                    .Where(i => i.DateClosed == null)
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+            else 
+            {
+                incidents = context.Incidents
+                    .Include(i => i.Customer)
+                    .Include(i => i.Product)
+                    .OrderBy(i => i.DateOpened)
+                    .ToList();
+            }
+
+            var vm = new IncidentViewModel { Incidents = incidents};
+            return View(vm.Incidents);
         }
         public IActionResult Details(int id)
         {
@@ -37,43 +64,56 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Action = "Add";
-            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
-            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
-            return View("Edit", new Incident());
+            string action = "Add";
+            List<Technician> technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+            List<Customer> customers = context.Customers.OrderBy(i => i.FirstName).ToList();
+            List<Product> products = context.Products.OrderBy(i => i.Name).ToList();
+
+            IncidentViewModel vm = new IncidentViewModel
+            {
+                Technicians = technicians,
+                Customers = customers,
+                Products = products,
+                Action = action,
+                CurrentIncident = new Incident()
+            };
+            return View("Edit", vm);
         }
         
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.Action = "Edit";
-            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
-            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+            string action = "Edit";
+            List<Technician> technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+            List<Customer> customers = context.Customers.OrderBy(i => i.FirstName).ToList();
+            List<Product> products = context.Products.OrderBy(i => i.Name).ToList();
 
-            var incident = context.Incidents
-              .Include(i => i.Customer)
-              .Include(i => i.Product)
-              .First(i => i.IncidentId == id);
-
-            return View(incident);
+            IncidentViewModel vm = new IncidentViewModel
+            {
+                Technicians = technicians,
+                Customers = customers,
+                Products = products,
+                Action = action,
+                CurrentIncident = new Incident()
+            };
+            return View("Edit", vm.Incidents);
         }
 
         [HttpPost]
-        public IActionResult Edit(Incident inc)
+        public IActionResult Edit(IncidentViewModel vm)
         {
-            string action = (inc.IncidentId == 0) ? "Add" : "Edit";
+            string action = vm.Action;
             if (ModelState.IsValid)
             {
                 if (action == "Add")
                 {
-                    
-                    context.Incidents.Add(inc);
+
+                    vm.CurrentIncident.DateOpened = DateTime.Now;
+                    context.Incidents.Add(vm.CurrentIncident);
                 }
                 else
                 {
-                    context.Incidents.Update(inc);
+                    context.Incidents.Update(vm.CurrentIncident);
                 }
                 context.SaveChanges();
                 return RedirectToAction("Index", "Incident");
@@ -81,9 +121,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             }
             else
             {
-                ViewBag.Action = action;
-                ViewBag.Incidents = context.Incidents.OrderBy(i => i.Title).ToList();
-                return View(inc);
+                return View(vm);
             }
         }
 
@@ -103,6 +141,15 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             context.Incidents.Remove(inc);
             context.SaveChanges();
             return RedirectToAction("Index", "Incident");
+        }
+
+
+        public IActionResult Update()
+        {
+            var technicians = context.Technicians
+               .OrderBy(i => i.Name);
+            var vm = new IncidentViewModel { Incidents = (List<Incident>)technicians };
+            return View(vm.Technician.Name);
         }
     }
 }
