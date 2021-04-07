@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class IncidentController : Controller
     {
-        private SportsProContext context { get; set; }
-        public IncidentController(SportsProContext ctx)
+        private IUnitOfWork incidentUnit;
+        public IncidentController(IUnitOfWork ctx)
         {
-            context = ctx;
+            this.incidentUnit = ctx;
         }
         public IActionResult Index()
         {
+<<<<<<< HEAD
             var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
             ViewBag.Filter = filter;
             var incidents = context.Incidents.ToList();
@@ -48,25 +51,32 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                     .ToList();
             }
 
+=======
+            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
+                
+                .OrderBy(i => i.DateOpened)
+                .ToList();
+>>>>>>> origin/main
             return View(incidents);
         }
         public IActionResult Details(int id)
         {
-            var incident = context.Incidents
-               .Include(i => i.Customer)
-               .Include(i => i.Product)
-               .Include(i => i.Technician)
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product,Technician")
+               
+               
                .FirstOrDefault(i => i.IncidentId == id);
 
             return View(incident);
         }
         [HttpGet]
         public IActionResult Add()
+            
         {
             ViewBag.Action = "Add";
-            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
-            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+            ViewBag.Customers = incidentUnit.CustomerRepository.GetAll().OrderBy(c => c.FirstName).ToList();
+
+            ViewBag.Products = incidentUnit.ProductRepository.GetAll().OrderBy(i => i.Name).ToList();
+            ViewBag.Technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
             return View("Edit", new Incident());
         }
         
@@ -74,13 +84,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.Customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            ViewBag.Products = context.Products.OrderBy(i => i.Name).ToList();
-            ViewBag.Technicians = context.Technicians.OrderBy(i => i.Name).ToList();
+            ViewBag.Customers = incidentUnit.CustomerRepository.GetAll().OrderBy(c => c.FirstName).ToList();
+            ViewBag.Products = incidentUnit.ProductRepository.GetAll().OrderBy(p => p.Name).ToList();           
 
-            var incident = context.Incidents
-              .Include(i => i.Customer)
-              .Include(i => i.Product)
+            ViewBag.Technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(t => t.Name).ToList();
+
+            var incident = incidentUnit.IncidentRepository.GetAll()              
               .First(i => i.IncidentId == id);
 
             return View(incident);
@@ -95,20 +104,20 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 if (action == "Add")
                 {
                     
-                    context.Incidents.Add(inc);
+                    incidentUnit.IncidentRepository.Add(inc);
                 }
                 else
                 {
-                    context.Incidents.Update(inc);
+                    incidentUnit.IncidentRepository.Update(inc);
                 }
-                context.SaveChanges();
+                incidentUnit.IncidentRepository.Save();
                 return RedirectToAction("Index", "Incident");
 
             }
             else
             {
                 ViewBag.Action = action;
-                ViewBag.Incidents = context.Incidents.OrderBy(i => i.Title).ToList();
+                ViewBag.Incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Product,Customer,Technician").OrderBy(i => i.Title).ToList();
                 return View(inc);
             }
         }
@@ -116,9 +125,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var incident = context.Incidents
-              .Include(i => i.Customer)
-              .Include(i => i.Product)
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
+              
               .FirstOrDefault(i => i.IncidentId == id);
 
             return View(incident);
@@ -126,8 +134,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpPost]
         public IActionResult Delete(Incident inc)
         {
-            context.Incidents.Remove(inc);
-            context.SaveChanges();
+            incidentUnit.IncidentRepository.Remove(inc);
+            incidentUnit.IncidentRepository.Save();
             return RedirectToAction("Index", "Incident");
         }
     }

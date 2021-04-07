@@ -72,7 +72,7 @@ body {
 }
 
 .input-validation-error {
-    border: 2px solid #dc3545;
+    border: 2px solid red;
     background-color: #faebd7;
 }
 

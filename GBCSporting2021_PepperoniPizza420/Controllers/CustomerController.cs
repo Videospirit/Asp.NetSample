@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,26 +12,28 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class CustomerController : Controller
     {
-        private SportsProContext context { get; set; }
+        public IUnitOfWork customerUnit;
 
-        public CustomerController(SportsProContext ctx)
+        public CustomerController(IUnitOfWork ctx)
         {
-            context = ctx;
+            this.customerUnit = ctx;
         }
 
         //[HttpGet]
         public IActionResult Index()
         {
-            var customers = context.Customers
-                .Include(c => c.Country)
+            var customers = customerUnit.CustomerRepository.GetAll(includeProperties: "Country")                
                 .OrderBy(c => c.FirstName).ToList();
+
+            
+               
             return View(customers);
         }
         //[HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
+            ViewBag.Countries = customerUnit.CountryRepository.GetAll().OrderBy(c =>c.Name).ToList();
             return View("Edit", new Customer());
         }
 
@@ -37,20 +41,22 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
-            var customer = context.Customers
-                .Include(c => c.Country)
-                .FirstOrDefault(c => c.CustomerId == id);
-            return View(customer);
+            ViewBag.Countries = customerUnit.CountryRepository.GetAll().OrderBy(c => c.Name).ToList();
+            var customers = customerUnit.CustomerRepository.GetAll()    
+                 
+                 .FirstOrDefault(c => c.CustomerId == id);
+            
+            return View(customers);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var customer = context.Customers
-                .Include(c => c.Country)
+            var customers = customerUnit.CustomerRepository.GetAll()
+                
                 .FirstOrDefault(c => c.CustomerId == id);
-            return View(customer);
+            
+            return View(customers);
         }
 
         [HttpPost]
@@ -62,19 +68,19 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             {
                 if (action == "Add")
                 {
-                    context.Customers.Add(customer);
+                    customerUnit.CustomerRepository.Add(customer);
                 }
                 else
                 {
-                    context.Customers.Update(customer);
+                    customerUnit.CustomerRepository.Update(customer);
                 }
-                context.SaveChanges();
+                customerUnit.CustomerRepository.Save();
                 return RedirectToAction("Index", "Customer");
             }
             else
             {
                 ViewBag.Action = action;
-                ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
+                ViewBag.Countries = customerUnit.CountryRepository.GetAll().OrderBy(c => c.Name).ToList();
                 return View(customer);
             }
         }
@@ -82,8 +88,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpPost]
         public IActionResult Delete(Customer customer)
         {
-            context.Customers.Remove(customer);
-            context.SaveChanges();
+            customerUnit.CustomerRepository.Remove(customer);
+            customerUnit.CustomerRepository.Save();
             return RedirectToAction("Index", "Customer");
         }
 
