@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,25 +12,25 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class RegistrationController : Controller
     {
+        private IUnitOfWork registrationUnit;
 
-        private SportsProContext context { get; set; }
-
-        public RegistrationController(SportsProContext ctx)
+        public RegistrationController(IUnitOfWork ctx)
         {
-            context = ctx;
+            this.registrationUnit = ctx;
         }
         public IActionResult Index()
         {
-            var customers = context.Customers
-                .OrderBy(c => c.FirstName).ToList();
+            var customers = registrationUnit.CustomerRepository.GetAll()
+                           .OrderBy(c => c.FirstName).ToList();
             return View(customers);
         }
 
+        [HttpPost]
         public IActionResult Select(int id)
         {
+            var customer = registrationUnit.CustomerRepository.GetAll()
+                 .FirstOrDefault(c => c.CustomerId == id);
             var sess = new CustomerSession(HttpContext.Session);
-            var customer = context.Customers
-                .FirstOrDefault(c => c.CustomerId == id);
             sess.SetCustomer(customer);
             return RedirectToAction("Edit");
         }
@@ -38,9 +39,9 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             var sess = new CustomerSession(HttpContext.Session);
             var customer = sess.GetCustomer();
-            var Registrations = context.Registrations
+            var Registrations = registrationUnit.RegistrationRepository.GetAll()
                 .Where(s => s.CustomerId == customer.CustomerId);
-            ViewBag.Products = context.Products.OrderBy(c => c.Name).ToList();
+            ViewBag.Products = registrationUnit.ProductRepository.GetAll().OrderBy(i => i.Name).ToList();
             return View(Registrations);
         }
 
@@ -48,10 +49,10 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Delete(int id)
         {
             var sess = new CustomerSession(HttpContext.Session);
-            var registration = context.Registrations
+            var registration = registrationUnit.RegistrationRepository.GetAll(includeProperties: "Product,Customer")
                 .FirstOrDefault(r => r.Product.ProductId == id && r.Customer.CustomerId == sess.GetCustomer().CustomerId);
-            context.Registrations.Remove(registration);
-            context.SaveChanges();
+            registrationUnit.RegistrationRepository.Remove(registration);
+            registrationUnit.RegistrationRepository.Save();
             return RedirectToAction("Edit");
         }
 
@@ -60,9 +61,9 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             bool absent = true;
             var sess = new CustomerSession(HttpContext.Session);
-            var customer = context.Customers
+            var customer = registrationUnit.CustomerRepository.GetAll()
                  .FirstOrDefault(c => c.CustomerId == sess.GetCustomer().CustomerId);
-            var Registrations = context.Registrations
+            var Registrations = registrationUnit.RegistrationRepository.GetAll()
                 .Where(s => s.CustomerId == customer.CustomerId);
             foreach(Registration r in Registrations)
             {
@@ -75,11 +76,11 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 add.Customer = customer;
                 add.CustomerId = customer.CustomerId;
                 add.ProductId = id;
-                var product = context.Products
+                var product = registrationUnit.ProductRepository.GetAll()
                 .FirstOrDefault(c => c.ProductId == id);
                 add.Product = product;
-                context.Registrations.Add(add);
-                context.SaveChanges();
+                registrationUnit.RegistrationRepository.Add(add);
+                registrationUnit.RegistrationRepository.Save();
             }
             return RedirectToAction("Edit");
         }
