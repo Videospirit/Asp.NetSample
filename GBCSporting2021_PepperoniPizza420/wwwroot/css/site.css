@@ -1,6 +1,22 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
+/* Validations Custom Styles */
+.input-validation-error {
+    border: 2px solid red;
+    background-color: #faebd7;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summery-errors ul {
+    list-style: none;
+}
+
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -71,16 +87,4 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-.input-validation-error {
-    border: 2px solid red;
-    background-color: #faebd7;
-}
-
-.validation-summary-valid {
-    display: none;
-}
-
-.validation-summery-errors ul {
-    list-style: none;
-}
 
