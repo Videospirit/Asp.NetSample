@@ -14,7 +14,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     public class ProductController : Controller 
     {
         public IProductRepository productRepository;
-        private string message;
 
 
         
@@ -66,15 +65,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                     
                     productRepository.Add(product);
                     productRepository.Save();
-                    message = product.Code + " has been added.";
                 }
                 else
                 {
                     productRepository.Update(product);
-                    message = product.Code + " has been succesfully updated.";
                 }
                 productRepository.Save();
-                TempData["message"] = message;
                 return RedirectToAction("Index", "Product");
             }
             else
@@ -101,8 +97,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             productRepository.Remove(product);
             productRepository.Save();
-            message = "Product has been succesfully delete.";
-            TempData["message"] = message;
             return RedirectToAction("Index", "Product");
         }
 
