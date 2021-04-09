@@ -64,6 +64,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                     technicianRepository.Save();
                     message = technician.Name + " has been succesfully updated.";
                 }
+                TempData["message"] = message;
                 return RedirectToAction("Index", "Technician");
             }
             else
