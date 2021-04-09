@@ -13,31 +13,31 @@
         <div class="form-group">
             <label asp-for="CurrentIncident.CustomerId" class="font-weight-bold">Customer: </label>
             <input type="hidden" asp-for="CurrentIncident.CustomerId" class="font-weight-bold">
-            <label asp-for="CurrentIncident.Customer.FirstName" class="font-weight-bold">@Model.CurrentIncident.Customer.FirstName</label>
+            <label asp-for="CurrentIncident.Customer.FirstName">@Model.CurrentIncident.Customer.FirstName</label>
         </div>
         <div class="form-group">
             <label asp-for="CurrentIncident.ProductId" class="font-weight-bold">Product: </label>
             <input type="hidden" asp-for="CurrentIncident.ProductId" class="font-weight-bold">
-            <label asp-for="CurrentIncident.ProductId" class="font-weight-bold">@Model.CurrentIncident.Product.Name</label>
+            <label asp-for="CurrentIncident.ProductId">@Model.CurrentIncident.Product.Name</label>
         </div>
         <div class="form-group">
-            <label asp-for="CurrentIncident.Title" class="font-weight-bold">Title</label>
+            <label asp-for="CurrentIncident.Title" class="font-weight-bold">Title:</label>
             <input type="hidden" asp-for="CurrentIncident.Title" class="font-weight-bold">
-            <label asp-for="CurrentIncident.Title" class="font-weight-bold">@Model.CurrentIncident.Title</label>
+            <label asp-for="CurrentIncident.Title" >@Model.CurrentIncident.Title</label>
         </div>
         <div class="form-group">
             <label asp-for="CurrentIncident.Description" class="font-weight-bold">Description</label>
             <input asp-for="CurrentIncident.Description" class="form-control" placeholder="Please Enter a Description">
         </div>
         <div class="form-group">
-            <label asp-for="CurrentIncident.TechnicianId" class="font-weight-bold">Technician</label>
+            <label asp-for="CurrentIncident.TechnicianId" class="font-weight-bold">Technician:</label>
             <input type="hidden" asp-for="CurrentIncident.TechnicianId" class="font-weight-bold">
-            <label asp-for="CurrentIncident.TechnicianId" class="font-weight-bold">@Model.CurrentIncident.Technician.Name</label>
+            <label asp-for="CurrentIncident.TechnicianId" >@Model.CurrentIncident.Technician.Name</label>
         </div>
         <div class="form-group">
-            <label asp-for="CurrentIncident.DateOpened" class="font-weight-bold">Date Opened</label>
+            <label asp-for="CurrentIncident.DateOpened" class="font-weight-bold">Date Opened:</label>
             <input type="hidden" asp-for="CurrentIncident.DateOpened" class="font-weight-bold">
-            <label asp-for="CurrentIncident.DateOpened" class="font-weight-bold">@Model.CurrentIncident.DateOpened</label>
+            <label asp-for="CurrentIncident.DateOpened" >@Model.CurrentIncident.DateOpened</label>
             <p>Current Date: @DateTime.Now</p>
         </div>
         <div class="form-group">
@@ -48,8 +48,5 @@
 
         <button type="submit" asp-action="@Model.Action" class="btn btn-success">Save</button>
         <button type="submit" asp-action="Cancel" class="btn btn-danger">Cancel</button>
-
-
-
     </form>
 </div>

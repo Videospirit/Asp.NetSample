@@ -15,7 +15,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     {
         private IUnitOfWork incidentUnit;
 
-        private string msg;
         public IncidentController(IUnitOfWork context)
         {
             this.incidentUnit = context;
