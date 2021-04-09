@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Registration>
+
+@{
+    ViewBag.Title = "getcustomer";
+}
+
+
+<div class="container my-5">
+    <div class="p-5 mb-4 bg-dark text-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Choose your Customer!</h1>
+            <p class="col-md-8 fs-4">Please feel free to register with us.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-light rounded p-4">
+    <h1>Customer Manager</h1>
+    <table class="table table-hover mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Registration registration in Model)
+            {
+                <tr>
+                    <td>@registration.Customer.FirstName @registration.Customer.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Registration" asp-action="Add" class="btn btn-primary">Add Customer</a>
+</div>
