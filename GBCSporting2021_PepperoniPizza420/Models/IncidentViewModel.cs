@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GBCSporting2021_PepperoniPizza420.Models
 {
-    public class IncidentViewModel : Incident
+    public class IncidentViewModel 
     {
         public List<Incident> Incidents { get; set; }
 

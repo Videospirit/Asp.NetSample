@@ -2,48 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Repositories;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class IncidentController : Controller
     {
-        private SportsProContext context { get; set; }
-        public IncidentController(SportsProContext ctx)
+        private IUnitOfWork incidentUnit;
+
+        private string msg;
+        public IncidentController(IUnitOfWork context)
         {
-            context = ctx;
+            this.incidentUnit = context;
         }
+        
         public IActionResult Index()
         {
             var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
             ViewBag.Filter = filter;
-            var incidents = context.Incidents.ToList();
+            var incidents = incidentUnit.IncidentRepository.GetAll().ToList();
 
             if (filter == "unassigned")
             {
-                incidents = context.Incidents
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
                     .Where(i => i.Technician == null)
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
             else if (filter == "open")
             {
-                incidents = context.Incidents
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
                     .Where(i => i.DateClosed == null)
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
-            else 
+            else
             {
-                incidents = context.Incidents
-                    .Include(i => i.Customer)
-                    .Include(i => i.Product)
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
@@ -51,23 +51,20 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             var vm = new IncidentViewModel { Incidents = incidents};
             return View(vm.Incidents);
         }
+
         public IActionResult Details(int id)
         {
-            var incident = context.Incidents
-               .Include(i => i.Customer)
-               .Include(i => i.Product)
-               .Include(i => i.Technician)
-               .FirstOrDefault(i => i.IncidentId == id);
-
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product,Technician").FirstOrDefault(i => i.IncidentId == id);
             return View(incident);
         }
+
         [HttpGet]
         public IActionResult Add()
         {
             string action = "Add";
-            List<Technician> technicians = context.Technicians.OrderBy(i => i.Name).ToList();
-            List<Customer> customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            List<Product> products = context.Products.OrderBy(i => i.Name).ToList();
+            List<Technician> technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
+            List<Customer> customers = incidentUnit.CustomerRepository.GetAll().OrderBy(i => i.FirstName).ToList();
+            List<Product> products = incidentUnit.ProductRepository.GetAll().OrderBy(i => i.Name).ToList();
 
             IncidentViewModel vm = new IncidentViewModel
             {
@@ -84,19 +81,21 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Edit(int id)
         {
             string action = "Edit";
-            List<Technician> technicians = context.Technicians.OrderBy(i => i.Name).ToList();
-            List<Customer> customers = context.Customers.OrderBy(i => i.FirstName).ToList();
-            List<Product> products = context.Products.OrderBy(i => i.Name).ToList();
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product,Technician").FirstOrDefault(i => i.IncidentId == id);
+
+            List<Technician> technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
+            List<Customer> customers = incidentUnit.CustomerRepository.GetAll().OrderBy(i => i.FirstName).ToList();
+            List<Product> products = incidentUnit.ProductRepository.GetAll().OrderBy(i => i.Name).ToList();
 
             IncidentViewModel vm = new IncidentViewModel
-            {
+            {   
                 Technicians = technicians,
                 Customers = customers,
                 Products = products,
                 Action = action,
-                CurrentIncident = new Incident()
+                CurrentIncident = incident
             };
-            return View("Edit", vm.Incidents);
+            return View(vm);
         }
 
         [HttpPost]
@@ -109,13 +108,13 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 {
 
                     vm.CurrentIncident.DateOpened = DateTime.Now;
-                    context.Incidents.Add(vm.CurrentIncident);
+                    incidentUnit.IncidentRepository.Add(vm.CurrentIncident);
                 }
                 else
                 {
-                    context.Incidents.Update(vm.CurrentIncident);
+                    incidentUnit.IncidentRepository.Update(vm.CurrentIncident); 
                 }
-                context.SaveChanges();
+                incidentUnit.IncidentRepository.Save(); // Wut
                 return RedirectToAction("Index", "Incident");
 
             }
@@ -128,28 +127,71 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var incident = context.Incidents
-              .Include(i => i.Customer)
-              .Include(i => i.Product)
-              .FirstOrDefault(i => i.IncidentId == id);
-
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product").FirstOrDefault(i => i.IncidentId == id);
             return View(incident);
         }
         [HttpPost]
         public IActionResult Delete(Incident inc)
         {
-            context.Incidents.Remove(inc);
-            context.SaveChanges();
+            incidentUnit.IncidentRepository.Remove(inc);
+            incidentUnit.IncidentRepository.Save();
             return RedirectToAction("Index", "Incident");
         }
 
-
+        [HttpGet]
         public IActionResult Update()
+        {    
+
+            List<Technician> technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
+            var vm = new IncidentViewModel { Technicians = technicians};
+            return View(vm.Technicians);
+        }
+        
+        [HttpGet]
+        public IActionResult TechnicianIncidents(int id)
         {
-            var technicians = context.Technicians
-               .OrderBy(i => i.Name);
-            var vm = new IncidentViewModel { Incidents = (List<Incident>)technicians };
-            return View(vm.Technician.Name);
+            ViewBag.Technician = incidentUnit.TechnicianRepository.GetById(id);
+            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Product,Customer,Technician").Where(i => i.TechnicianId == id && i.DateClosed == null).OrderBy(i => i.DateOpened);
+            ViewBag.Records = incidents.ToList().Count();           
+            return View(incidents);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateIncident(int id)
+        {
+            string action = "UpdateIncident";
+            var incident = incidentUnit.IncidentRepository.GetAll(includeProperties: "Product,Customer,Technician")
+                .FirstOrDefault(i => i.IncidentId == id);
+
+            List<Technician> technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
+            List<Customer> customers = incidentUnit.CustomerRepository.GetAll().OrderBy(i => i.FirstName).ToList();
+            List<Product> products = incidentUnit.ProductRepository.GetAll().OrderBy(i => i.Name).ToList();
+
+            IncidentViewModel vm = new IncidentViewModel
+            {
+                Technicians = technicians,
+                Customers = customers,
+                Products = products,
+                CurrentIncident = incident,
+                Action = action
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateIncident(IncidentViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                incidentUnit.IncidentRepository.Update(vm.CurrentIncident);
+            }
+            incidentUnit.IncidentRepository.Save();
+            return RedirectToAction("TechnicianIncidents", new{ id = vm.CurrentIncident.TechnicianId });
+        }
+
+        public IActionResult Cancel(IncidentViewModel vm)
+        {
+            return RedirectToAction("TechnicianIncidents", new { id = vm.CurrentIncident.TechnicianId });
         }
     }
 }
