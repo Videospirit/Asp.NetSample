@@ -1,29 +1,26 @@
-﻿@model IEnumerable<Registration>
+@model IEnumerable<Customer>
 
 @{
-    ViewBag.Title = "Registration";
+    string title = "Registration";
+    ViewBag.Title = title;
 }
 
 
-<div class="container my-5">
-    <div class="p-5 mb-4 bg-dark text-light rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Welcome to Registrations</h1>
-            <p class="col-md-8 fs-4">Please feel free to register with us.</p>
-        </div>
-    </div>
-</div>
 
-<div class="container-fluid bg-light rounded p-4">
-    <h1>Customer Manager</h1>
-    <table class="table table-hover mt-3">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <a asp-controller="Registration" asp-action="getcustomer" class="btn btn-primary">Get Customer</a>
+<div class="container my-5">
+    <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Select" method="post">
+        <h1>Get Customer</h1>
+
+        <div class="form-group">
+            <select id="id" name ="id" class="form-control">
+                @foreach (Customer c in Model)
+                {
+                    <option value="@c.CustomerId">@c.FirstName @c.LastName</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Select</button>
+    </form>
+
 </div>

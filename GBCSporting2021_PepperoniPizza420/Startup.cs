@@ -33,7 +33,11 @@ namespace GBCSporting2021_PepperoniPizza420
                 options.AppendTrailingSlash = true;
             });
 
-            services.AddControllersWithViews();
+            //To Enable Sessions
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddControllersWithViews().AddNewtonsoftJson();
+
             services.AddDbContext<SportsProContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("SportsProContext")));
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -65,6 +69,9 @@ namespace GBCSporting2021_PepperoniPizza420
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //To enable Sessions
+            app.UseSession();
 
             app.UseAuthorization();
 
