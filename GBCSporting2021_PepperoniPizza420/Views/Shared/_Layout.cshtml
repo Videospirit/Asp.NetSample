@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SPORTS PRO - PepperoniPizza</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,22 +19,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-2">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Products</a>
+                            <a class="nav-link text-light" asp-controller="Product" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Technician" asp-action="Index">Technicians</a>
+                            <a class="nav-link text-light" asp-controller="Technician" asp-action="Index">Technicians</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Customer" asp-action="Index">Customers</a>
+                            <a class="nav-link text-light" asp-controller="Customer" asp-action="Index">Customers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Incident" asp-action="Index">Incidents</a>
+                            <a class="nav-link text-light" asp-controller="Incident" asp-action="Index">Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Registration" asp-action="Index">Registrations</a>
+                            <a class="nav-link text-light" asp-controller="Registration" asp-action="Index">Registrations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="About" asp-action="Index">About</a>
                         </li>
                     </ul>
                 </div>
@@ -47,8 +50,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-light text-muted">
-        <div class="container text-center">
+    <footer class="fixed-bottom p-3 bg-dark text-muted">
+        <div class="container text-light text-center">
             &copy; 2021 - GBCSporting2021_PepperoniPizza420 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
 
