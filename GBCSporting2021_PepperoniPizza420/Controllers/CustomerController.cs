@@ -13,14 +13,13 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     public class CustomerController : Controller
     {
         public IUnitOfWork customerUnit;
-        private string message;
 
         public CustomerController(IUnitOfWork ctx)
         {
             this.customerUnit = ctx;
         }
 
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Index()
         {
             var customers = customerUnit.CustomerRepository.GetAll(includeProperties: "Country")                
@@ -30,7 +29,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                
             return View(customers);
         }
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
@@ -70,15 +69,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 if (action == "Add")
                 {
                     customerUnit.CustomerRepository.Add(customer);
-                    message = customer.FirstName + " " + customer.LastName + " has been succesfully added.";
                 }
                 else
                 {
                     customerUnit.CustomerRepository.Update(customer);
-                    message = customer.FirstName + " " + customer.LastName + " has been succesfully updated.";
                 }
                 customerUnit.CustomerRepository.Save();
-                TempData["message"] = message;
                 return RedirectToAction("Index", "Customer");
             }
             else
@@ -94,8 +90,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             customerUnit.CustomerRepository.Remove(customer);
             customerUnit.CustomerRepository.Save();
-            message = "Customer has been succesfully deleted";
-            TempData["message"] = message;
             return RedirectToAction("Index", "Customer");
         }
     }

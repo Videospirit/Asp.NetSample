@@ -13,7 +13,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     public class IncidentController : Controller
     {
         private IUnitOfWork incidentUnit;
-        private string message;
         public IncidentController(IUnitOfWork ctx)
         {
             this.incidentUnit = ctx;
@@ -72,15 +71,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 {
                     
                     incidentUnit.IncidentRepository.Add(inc);
-                    message = inc.Title + " has been succesfully added.";
                 }
                 else
                 {
                     incidentUnit.IncidentRepository.Update(inc);
-                    message = inc.Title + " has been succesfully updated.";
                 }
                 incidentUnit.IncidentRepository.Save();
-                TempData["message"] = message;
                 return RedirectToAction("Index", "Incident");
 
             }
@@ -106,8 +102,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             incidentUnit.IncidentRepository.Remove(inc);
             incidentUnit.IncidentRepository.Save();
-            message = "Incident has been succesfully removed";
-            TempData["message"] = message;
             return RedirectToAction("Index", "Incident");
         }
     }
