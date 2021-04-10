@@ -32,14 +32,15 @@ namespace GBCSporting2021_PepperoniPizza420
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = true;
             });
-
+          
             //To Enable Sessions
             services.AddMemoryCache();
             services.AddSession();
             services.AddControllersWithViews().AddNewtonsoftJson();
 
+            services.AddControllersWithViews();
             services.AddDbContext<SportsProContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("SportsProContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("SportsProContext")));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ITechnicianRepository, TechnicianRepository>();
@@ -47,9 +48,6 @@ namespace GBCSporting2021_PepperoniPizza420
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IIncidentRepository, IncidentRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +67,7 @@ namespace GBCSporting2021_PepperoniPizza420
             app.UseStaticFiles();
 
             app.UseRouting();
-
+          
             //To enable Sessions
             app.UseSession();
 

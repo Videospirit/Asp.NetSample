@@ -92,6 +92,15 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             customerUnit.CustomerRepository.Save();
             return RedirectToAction("Index", "Customer");
         }
+
+        public JsonResult CheckEmail(string email)
+        {
+            var hasEmail = customerUnit.CustomerRepository.GetAll().FirstOrDefault(x => x.Email == email);
+            if (hasEmail != null)
+                return Json($"Email address {email} is already registered.");
+            else
+                return Json(true);
+        }
     }
 }
 

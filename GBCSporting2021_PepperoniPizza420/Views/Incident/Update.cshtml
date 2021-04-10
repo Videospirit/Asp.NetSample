@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Technician>
+
+@{
+    string title = "Technician";
+    ViewBag.Title = title;
+}
+<form class="box-shadow bg-light rounded p-4" method="get">
+    <div class="d-flex align-items-center justify-content-center my-xl-5">
+        <div class="container bg-light rounded my-xl-5 p-4 box-shadow">
+            <div class="my-5">
+                <h1>@title</h1>
+                <div class="form-group">
+                    <select id="Select" class="form-control">
+                        <option value="0">Select Technician</option>
+                        @foreach (var tec in Model)
+                        {
+                            <option value="@tec.TechnicianId">@tec.Name</option>
+                        }
+                    </select>
+                </div>
+                <a id="SelectBtn" class="btn btn-primary">Select</a>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+       
+        $("#SelectBtn").click(function () {
+            if ($("#Select").val() == "0") {
+                alert("Ploase select a valid technician.")
+            } else {
+                window.location = "/incident/technicianincidents/" + $("#Select").val();
+            }
+        })
+    </script>
