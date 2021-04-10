@@ -8,6 +8,15 @@
             <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
+    
+    @if (TempData["message"] != null)
+    {
+        <div class="col-sm-8">
+            <div class="alert alert-primary">
+                @TempData["message"]
+            </div>
+        </div>
+    }
 
     <div class="container-fluid bg-light rounded p-4">
         <h1>Incidents</h1>
