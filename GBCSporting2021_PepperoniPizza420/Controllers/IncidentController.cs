@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
+
 using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Repositories;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,16 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     {
         private IUnitOfWork incidentUnit;
 
-        public IncidentController(IUnitOfWork context)
+        public IncidentController(IUnitOfWork ctx)
         {
-            this.incidentUnit = context;
+            this.incidentUnit = ctx;
         }
         
         public IActionResult Index()
         {
             var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
             ViewBag.Filter = filter;
-            var incidents = incidentUnit.IncidentRepository.GetAll().ToList();
+            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product") .OrderBy(i => i.DateOpened).ToList();
 
             if (filter == "unassigned")
             {
@@ -59,6 +60,7 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
         [HttpGet]
         public IActionResult Add()
+            
         {
             string action = "Add";
             List<Technician> technicians = incidentUnit.TechnicianRepository.GetAll().OrderBy(i => i.Name).ToList();
@@ -105,7 +107,6 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             {
                 if (action == "Add")
                 {
-
                     vm.CurrentIncident.DateOpened = DateTime.Now;
                     incidentUnit.IncidentRepository.Add(vm.CurrentIncident);
                 }

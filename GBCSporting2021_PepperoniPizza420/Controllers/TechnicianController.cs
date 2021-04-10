@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GBCSporting2021_PepperoniPizza420.DataAccessLayer.Interfaces;
 using GBCSporting2021_PepperoniPizza420.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +10,16 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 {
     public class TechnicianController : Controller
     {
-        private SportsProContext context { get; set; }
-        public TechnicianController(SportsProContext ctx)
+        private ITechnicianRepository technicianRepository;
+        public TechnicianController(ITechnicianRepository technicianRepository)
         {
-            context = ctx;
+            this.technicianRepository = technicianRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var technicians = context.Technicians.ToList();
+            var technicians = technicianRepository.GetAll().ToList();
             return View(technicians);
         }
 
@@ -32,14 +33,14 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            var technician = context.Technicians.FirstOrDefault(t => t.TechnicianId == id);
+            var technician = technicianRepository.GetAll().FirstOrDefault(t => t.TechnicianId == id);
             return View(technician);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var technician = context.Technicians.FirstOrDefault(t => t.TechnicianId == id);
+            var technician = technicianRepository.GetAll().FirstOrDefault(t => t.TechnicianId == id);
             return View(technician);
         }
 
@@ -51,14 +52,15 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
             if (ModelState.IsValid)
             {
                 if (action == "Add"){
-                    context.Technicians.Add(technician);
-                    context.SaveChanges();
+                    technicianRepository.Add(technician);
+                    technicianRepository.Save();
                 }
                 else
                 {
-                    context.Technicians.Update(technician);
-                    context.SaveChanges();
+                    technicianRepository.Update(technician);
+                    technicianRepository.Save();
                 }
+                TempData["message"] = message;
                 return RedirectToAction("Index", "Technician");
             }
             else
@@ -71,8 +73,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         [HttpPost]
         public IActionResult Delete(Technician technician)
         {
-            context.Technicians.Remove(technician);
-            context.SaveChanges();
+            technicianRepository.Remove(technician);
+            technicianRepository.Save();
             return RedirectToAction("Index", "Technician");
         }
     }
