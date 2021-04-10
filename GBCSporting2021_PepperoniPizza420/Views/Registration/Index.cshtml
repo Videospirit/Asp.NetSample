@@ -1,18 +1,25 @@
 @model IEnumerable<Customer>
 
 @{
-    string title = "Registration";
+    string title = "Registrations";
     ViewBag.Title = title;
 }
 
 
 
 <div class="container my-5">
-    <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Select" method="post">
+    <h1 class="p-2">@title</h1>
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <form class="bg-dark text-light rounded p-5 m-3 font-weight-bold box-shadow" asp-action="Select" method="post">
         <h1>Get Customer</h1>
 
         <div class="form-group">
-            <select id="id" name ="id" class="form-control">
+            <select id="id" name="id" class="form-control">
                 @foreach (Customer c in Model)
                 {
                     <option value="@c.CustomerId">@c.FirstName @c.LastName</option>
@@ -20,7 +27,13 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Select</button>
+        <button type="submit" class="btn btn-primary">Select</button>
     </form>
 
+
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
 </div>

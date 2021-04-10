@@ -8,35 +8,49 @@
 }
 
 <div class="container my-5 mb-5">
-    <h1>Customer: @customer.FirstName @customer.LastName</h1>
-    <h1>@title</h1>
-    <table>
-        <tr><td><b>Product</b></td><td></td></tr>
-        @foreach (Registration r in Model)
-        {
-            <tr>
-                <td> @r.Product.Name</td>
-                <td> <a asp-controller="Registration" asp-action="Delete"
-   asp-route-id="@r.ProductId" class="btn btn-danger">Delete</a>
-</td>
-            </tr>
-        }
-    </table>
+    <h1 class="p-2">@title</h1>
+    <div class="container bg-dark text-light p-4">
 
-
-
-    <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Register" method="post">
-
-        <div class="form-group">
-            <label>Product</label>
-            <select id ="id" name="id" class="form-control">
-                @foreach (Product c in ViewBag.Products)
+        <h1>Customer: @customer.FirstName @customer.LastName</h1>
+        <table class="my-5 table table-secondary text-center table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Registration r in Model)
                 {
-                    <option value="@c.ProductId">@c.Name</option>
+                    <tr>
+                        <td class="p-2"> @r.Product.Name</td>
+                        <td>
+                            <a asp-controller="Registration" asp-action="Delete"
+                               asp-route-id="@r.ProductId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
                 }
-            </select>
-        </div>
+            </tbody>
+        </table>
 
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
+
+
+        <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Register" method="post">
+
+            <div class="form-group">
+                <label>Product</label>
+                <select id="id" name="id" class="form-control">
+                    @foreach (Product c in ViewBag.Products)
+                    {
+                        <option value="@c.ProductId">@c.Name</option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+        <div class="text-right">
+            <a asp-controller="Registration" asp-action="Index" class="btn  btn-danger">Cancel</a>
+        </div>
+    </div>
 </div>
