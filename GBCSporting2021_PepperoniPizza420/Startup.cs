@@ -32,6 +32,11 @@ namespace GBCSporting2021_PepperoniPizza420
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = true;
             });
+          
+            //To Enable Sessions
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddControllersWithViews();
             services.AddDbContext<SportsProContext>(options =>
@@ -62,6 +67,9 @@ namespace GBCSporting2021_PepperoniPizza420
             app.UseStaticFiles();
 
             app.UseRouting();
+          
+            //To enable Sessions
+            app.UseSession();
 
             app.UseAuthorization();
 

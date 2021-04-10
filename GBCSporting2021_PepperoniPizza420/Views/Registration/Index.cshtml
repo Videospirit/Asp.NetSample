@@ -1,15 +1,26 @@
-﻿@{
-    ViewBag.Title = "Home";
+@model IEnumerable<Customer>
+
+@{
+    string title = "Registration";
+    ViewBag.Title = title;
 }
 
 
 
 <div class="container my-5">
-    <div class="jumbotron rounded">
-        <h1 class="display-4">Come Back Soon! Registration currently under maintenance</h1>
-        <p class="lead">This site is currently unavailable. Please pay attention to featured content or information in the future.</p>
-        <hr class="my-4">
-        <p>Come back soon.</p>
-        <a asp-controller="Home" asp-action="Index">Home</a>
-    </div>
+    <form class="bg-light rounded p-4 my-3 font-weight-bold box-shadow" asp-action="Select" method="post">
+        <h1>Get Customer</h1>
+
+        <div class="form-group">
+            <select id="id" name ="id" class="form-control">
+                @foreach (Customer c in Model)
+                {
+                    <option value="@c.CustomerId">@c.FirstName @c.LastName</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Select</button>
+    </form>
+
 </div>
