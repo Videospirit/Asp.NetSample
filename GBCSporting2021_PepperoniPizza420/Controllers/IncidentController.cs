@@ -106,12 +106,12 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
                 {
                     vm.CurrentIncident.DateOpened = DateTime.Now;
                     incidentUnit.IncidentRepository.Add(vm.CurrentIncident);
-                    message = inc.Title + " has been succesfully added.";
+                    message = vm.CurrentIncident.Title + " has been succesfully added.";
                 }
                 else
                 {
                     incidentUnit.IncidentRepository.Update(vm.CurrentIncident); 
-                    message = inc.Title + " has been succesfully updated.";
+                    message = vm.CurrentIncident.Title + " has been succesfully updated.";
                 }
                 incidentUnit.IncidentRepository.Save(); 
                 TempData["message"] = message;
