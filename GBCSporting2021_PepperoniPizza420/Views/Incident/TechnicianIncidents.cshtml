@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Incident> 
+@using System.Linq
+@{
+    ViewBag.Title = "Incidents";
+}
+<div class="container-fluid my-5">
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+    
+    <div class="container-fluid bg-light rounded p-4">
+        <h1>Technician: @ViewBag.Technician.Name</h1>
+        <h1>Incidents: @ViewBag.Records</h1>
+        @if(ViewBag.Records == 0){ 
+            <h2>There are no open incidents for this technician</h2>
+        }else{
+    <table class="table table-hover my-3">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Product</th>
+                <th scope="col">Date Opened</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var incident in Model)
+            {
+                if (incident.DateClosed == null)
+                {
+                    {
+                        <tr>
+                            <td scope="row">@incident.Title</td>
+                            <td>@incident.Customer.FirstName</td>
+                            <td>@incident.Product.Name</td>
+                            <td>@incident.DateOpened</td>
+                            <td>
+                                <a asp-controller="Incident" asp-action="UpdateIncident" asp-route-id="@incident.IncidentId" class="btn btn-outline-success">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+        }
+        
+        <a asp-controller="Incident" asp-action="Update" class="btn btn-primary">Switch Technician</a>
+    </div>
+
+    <div class="align-bottom">
+        <div class="progress bg-white">
+            <div class="progress-bar progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+</div>
+
+

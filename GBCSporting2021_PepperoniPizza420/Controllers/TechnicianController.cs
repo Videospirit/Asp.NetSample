@@ -11,6 +11,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
     public class TechnicianController : Controller
     {
         private ITechnicianRepository technicianRepository;
+
+        private string message;
         public TechnicianController(ITechnicianRepository technicianRepository)
         {
             this.technicianRepository = technicianRepository;
@@ -51,15 +53,19 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
 
             if (ModelState.IsValid)
             {
-                if (action == "Add"){
+                if (action == "Add")
+                {
                     technicianRepository.Add(technician);
                     technicianRepository.Save();
+                    message = technician.Name + " has been succesfully added.";
                 }
                 else
                 {
                     technicianRepository.Update(technician);
                     technicianRepository.Save();
+                    message = technician.Name + " has been succesfully updated.";
                 }
+                TempData["message"] = message;
                 return RedirectToAction("Index", "Technician");
             }
             else
@@ -74,6 +80,8 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         {
             technicianRepository.Remove(technician);
             technicianRepository.Save();
+            message = "Technician has been succesfully deleted";
+            TempData["message"] = message;
             return RedirectToAction("Index", "Technician");
         }
     }
