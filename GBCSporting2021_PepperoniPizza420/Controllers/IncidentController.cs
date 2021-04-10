@@ -23,33 +23,28 @@ namespace GBCSporting2021_PepperoniPizza420.Controllers
         
         public IActionResult Index()
         {
-            var filter = HttpContext.Request.Query["Filter"].ToString() ?? "all";
+            var filter = HttpContext.Request.Query["Filter"].ToString() == "" ? "all" : HttpContext.Request.Query["Filter"].ToString();
             ViewBag.Filter = filter;
-            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product") .OrderBy(i => i.DateOpened).ToList();
+
+            var incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
+                .OrderBy(i => i.DateOpened)
+                .ToList();
 
             if (filter == "unassigned")
             {
-                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
                     .Where(i => i.Technician == null)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
             else if (filter == "open")
             {
-                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
+                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Technician,Product")
                     .Where(i => i.DateClosed == null)
                     .OrderBy(i => i.DateOpened)
                     .ToList();
             }
-            else
-            {
-                incidents = incidentUnit.IncidentRepository.GetAll(includeProperties: "Customer,Product")
-                    .OrderBy(i => i.DateOpened)
-                    .ToList();
-            }
-
-            var vm = new IncidentViewModel { Incidents = incidents};
-            return View(vm.Incidents);
+            return View(incidents);
         }
 
         public IActionResult Details(int id)
